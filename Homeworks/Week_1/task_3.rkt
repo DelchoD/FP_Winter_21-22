@@ -9,7 +9,7 @@
 
 (define (can-carry? number-of-products backpack-kilograms groceries-weight)
   (cond
-    [(or (negative? number-of-products) (negative? backpack-kilograms)(negative? groceries-weight)) error]
+    [(or (negative? number-of-products) (negative? backpack-kilograms)(negative? groceries-weight)) error "Values can't be negative"]
     [(<=(* number-of-products groceries-weight) backpack-kilograms) #t]
     [else #f]
     )
