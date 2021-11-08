@@ -9,13 +9,11 @@ the result of applying f to x, otherwise.
 |#
 
 (define (upper-bound f y)
-  (λ (x)
-    (cond
-      [(> x (f x)) y]
-      [else  (f x)]
-    )
+  (λ (x)(max (f x) y))
   )
-)
-
+                              ;y   ;x
+((upper-bound (λ (x) (* 2 x)) 101) 50)
 (= ((upper-bound (λ (x) (* 2 x)) 100) 50) 100)
 (= ((upper-bound (λ (x) (* 2 x)) 100.236) 500.002) 1000.004)
+(= ((upper-bound (λ (x) (* 2 x)) 70) 30) 70)
+
