@@ -12,7 +12,7 @@ main = do
     print $ areAmicable 6232 6368 == True
 
 sumDiv :: Int->Int
-sumDiv x = sum (filter (\ n -> rem x n == 0) [1 .. x-1])
+sumDiv x = sum $ filter (\ n -> mod x n == 0) [1 .. x-1]
 
 areAmicable :: Int -> Int -> Bool
 areAmicable x y =  x == sumDiv y || sumDiv x == y

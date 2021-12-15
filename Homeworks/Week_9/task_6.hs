@@ -23,7 +23,14 @@ isPrimeG :: Int -> Bool
 isPrimeG x
  | x < 0 = error "x should be greater than zero"
  | x == 1 = False
- | otherwise = length (filter (\ n -> rem x n == 0) [2 .. x]) == 1
+ | otherwise = helper [ n | n <- [2 .. x-1]]
+    where
+        helper :: [Int] -> Bool
+        helper divisors
+         | null divisors = True
+         | mod x (divisors!!0) == 0 = False
+         | otherwise = helper (tail divisors)
+ -- | otherwise = length (filter (\ n -> mod x n == 0) [2 .. x]) == 1
 
 isPrimeLC :: Int -> Bool
-isPrimeLC x = x /= 1 && length [ n | n <- [2 .. x], rem x n == 0] == 1
+isPrimeLC x = x /= 1 && length [ n | n <- [2 .. x], mod x n == 0] == 1

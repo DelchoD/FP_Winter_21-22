@@ -12,10 +12,10 @@ Implementation details:
 main :: IO()
 main = do
     print $ addN [1, 2, 3, 4, 5] 9999999999999999999999 == [10000000000000000000000,10000000000000000000001,10000000000000000000002,10000000000000000000003,10000000000000000000004]
-    print $ sqAddN [1, 2, 3, 4, 5] 5 == [36,49,64,81,100]
+    print $ sqAddN [1, 2, 3, 4, 5] 5  == [36,49,64,81,100]
     print $ sqAddN [1, 2, 3, 4, 5] (-5) == [16,9,4,1,0]
-    print $ divByN [1, 2, 3, 4, 5] 5 == [0.2,0.4,0.6,0.8,1.0]
-    print $ divByN [1, 2, 3, 4, 5] (-5) == [-0.2,-0.4,-0.6,-0.8,-1.0]
+    print $ divByN [1, 2, 3, 4, 5] 5  == [0.2,0.4,0.6,0.8,1.0]
+    print $ divByN [1, 2, 3, 4, 5] (-5)  == [-0.2,-0.4,-0.6,-0.8,-1.0]
     print $ filterByN [1, 2, 3, 4, 5] 3 == [3,4,5]
     print $ filterByN [1, 2, 3, 4, 5] (-3) == [1, 2, 3, 4, 5]
     
@@ -23,10 +23,10 @@ addN :: [Integer] -> Integer -> [Integer]
 addN xs x = map (+x) xs
 
 sqAddN :: [Integer] -> Integer -> [Integer]
-sqAddN xs y = map (\ x -> x * x) (map (+y) xs)
+sqAddN xs y = map ((^2).(+y)) xs
 
 divByN :: [Int] -> Int -> [Double]
-divByN xs n = map (\ x -> (fromIntegral x) / fromIntegral n) xs
+divByN xs n = map ((/ fromIntegral n) . (fromIntegral)) xs
 
 filterByN :: [Int] -> Int -> [Int]
-filterByN xs n = (filter (\ x -> x>=n) xs)
+filterByN xs n = filter (>=n) xs
