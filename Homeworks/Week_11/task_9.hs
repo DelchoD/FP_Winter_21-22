@@ -12,11 +12,17 @@ main = do
 
 
 getDivisors :: Int-> [Int]
-getDivisors num = if num< 0 then [1] else [ x | x <- [1 .. num-1], mod num x == 0]
+getDivisors num
+ | num < 0 = [1]
+ |otherwise = [ x | x <- [1 .. num-1], mod num x == 0]
 
 naturalProductWrapper :: [Int] -> Int -> Int
 naturalProductWrapper [] _ = 1
-naturalProductWrapper (x:xs) num = if (sum (getDivisors x)) `mod` num == 0 then x * (naturalProductWrapper xs num) else (naturalProductWrapper xs num) 
+naturalProductWrapper (x:xs) num
+ | (sum (getDivisors x)) `mod` num == 0 = x * (naturalProductWrapper xs num)
+ | otherwise = (naturalProductWrapper xs num)
 
 naturalProduct :: [Int] -> Int -> Int
-naturalProduct xs num = if (naturalProductWrapper xs num) <=1 then 0 else naturalProductWrapper xs num
+naturalProduct xs num
+ | (naturalProductWrapper xs num) <=1 = 0
+ | otherwise = naturalProductWrapper xs num

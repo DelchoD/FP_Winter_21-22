@@ -14,4 +14,4 @@ main = do
     
 isPresent :: (Eq a) => a -> [a] -> Bool
 isPresent _ [] = False
-isPresent n (x:xs) = if n==x then True else isPresent n xs
+isPresent n (x:xs) =  n==x || isPresent n xs

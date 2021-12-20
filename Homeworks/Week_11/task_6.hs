@@ -13,10 +13,11 @@ main = do
     print $ isImage [1, 2, 3, 4] [2, 3, 4, 4]  == (False, 0)
 
 checkImage :: (Num a, Eq a)=> [a]->[a]->a->Bool
-checkImage xs ys div
+checkImage [] _ _ = True
+checkImage _ [] _ = True
+checkImage (x:xs) (y:ys) div
  |length xs /= length ys = False
- |null xs || null ys = True
- |head ys - head xs == div = checkImage (tail xs) (tail ys) div
+ |y - x == div = checkImage xs ys div
  |otherwise = False
 
 isImage ::(Num a, Eq a)=> [a]-> [a]-> (Bool, a)

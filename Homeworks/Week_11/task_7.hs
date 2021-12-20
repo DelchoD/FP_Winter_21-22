@@ -18,6 +18,8 @@ main = do
     print $ isSorted [100, 101, -102]   == False
     print $ isSorted [1, 2, 3, 4, 5, 6] == True
     print $ isSorted [-1, -2, -3, -4, -5, -6] == True
+    --print $ isSorted [ ] == True
+    print $ isSorted [1] == True
 
     print $ isSortedXs [-5, -5, -6]  == True
     print $ isSortedXs [-5, -5, -4] == True
@@ -30,17 +32,25 @@ main = do
     print $ isSortedXs [100, 101, -102] == False
     print $ isSortedXs [1, 2, 3, 4, 5, 6] == True
     print $ isSortedXs [-1, -2, -3, -4, -5, -6] == True
+    print $ isSortedXs [ ] == True
+    print $ isSortedXs [1] == True
 
-isAccending ::( Ord a)=> [a]->Bool
-isAccending (x:y:[]) = if x <= y then True else False
-isAccending (x:y:xs) = if x <= y then isAccending (y:xs) else False
+isAccending ::( Ord a, Num a)=> [a]->Bool
+isAccending [x]= True
+isAccending [x,y] = x <= y 
+isAccending (x:y:xs)
+ | x <= y = isAccending (y:xs)
+ |otherwise = x <= y --instead of False
 
-isDecending ::( Ord a)=> [a]->Bool
-isDecending (x:y:[]) = if x >= y then True else False
-isDecending (x:y:xs) = if x >= y then isDecending (y:xs) else False
+isDecending ::( Ord a, Num a)=> [a]->Bool
+isDecending [x]= True
+isDecending [x,y] = x >= y
+isDecending (x:y:xs)
+ | x>=y = isDecending (y:xs)
+ | otherwise = x>=y
 
-isSorted ::( Ord a)=> [a]->Bool
+isSorted ::( Ord a, Num a)=> [a]->Bool
 isSorted xs =  isAccending xs || isDecending xs
 
-isSortedXs ::(Eq a, Ord a)=> [a]->Bool
+isSortedXs ::(Eq a, Ord a, Num a)=> [a]->Bool
 isSortedXs xs= (sort xs == xs) || (reverse (sort xs) == xs)

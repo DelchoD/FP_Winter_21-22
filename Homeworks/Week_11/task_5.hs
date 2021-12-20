@@ -17,4 +17,6 @@ combine xs = helper xs 0 0
     where 
      helper ::(Num a, Ord a) => [Point2D a] -> a -> a -> (a, a)
      helper [] sumMin sumMax = (sumMin, sumMax)
-     helper (x:xs) sumMin sumMax = if (fst x <= snd x) then helper xs (sumMin*10 + fst x) (sumMax*10 + snd x) else helper xs (sumMin*10 + snd x) (sumMax*10 + fst x)
+     helper ((first, second):xs) sumMin sumMax
+      | first <= second = helper xs (sumMin*10 + first) (sumMax*10 + second)
+      | otherwise = helper xs (sumMin*10 + second) (sumMax*10 + first)

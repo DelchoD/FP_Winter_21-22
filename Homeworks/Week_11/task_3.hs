@@ -21,12 +21,9 @@ main = do
     
 removeAll :: (Eq a) => a -> [a] -> [a]
 removeAll _ [] = []
-removeAll n xs = helper 0 n xs
-    where
-     helper :: (Eq a) => Int -> a -> [a] -> [a]
-     helper _ _ [] = []
-     helper 0 n (x:xs)= if x == n then helper 0 n xs else x:helper 0 n xs
+removeAll n (x:xs)
+ |n/=x = x:removeAll n xs
+ |otherwise = removeAll n xs
 
--- Partial application?
 removeAllHOF :: (Eq a) => a -> [a] -> [a]
-removeAllHOF n xs = filter (\ x -> n /= x) xs
+removeAllHOF n = filter (/= n)
